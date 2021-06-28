@@ -1,0 +1,6 @@
+﻿CREATE TABLE test.Users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    UserName VARCHAR(30) NOT NULL,
+    Hobbies VARCHAR(30) NOT NULL,
+    Location VARCHAR(50)
+);

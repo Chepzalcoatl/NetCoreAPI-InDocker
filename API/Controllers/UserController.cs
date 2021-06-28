@@ -30,7 +30,7 @@ namespace API.Controllers
             var usersDataBase = _configuration["MYSQL_DATABASE"] ?? _configuration.GetConnectionString("MYSQL_DATABASE");
 
             connString = $"server={host}; userid={userid};pwd={password};port={port};database={usersDataBase}";
-            _logger.LogDebug(connString);
+            _logger.LogInformation(connString);
         }
 
         [HttpGet("GetAllUsers")]
@@ -54,9 +54,10 @@ namespace API.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, "Unable To Process Request");
+                _logger.LogError(e.Message);
+                return StatusCode(500, $"Unable To Process Request \n {e.Message}");
             }
         }
 
@@ -88,9 +89,10 @@ namespace API.Controllers
                     return BadRequest("Unable To  User");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, "Unable To Process Request");
+                _logger.LogError(e.Message);
+                return StatusCode(500, $"Unable To Process Request \n {e.Message}");
             }
         }
 
